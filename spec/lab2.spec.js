@@ -1,6 +1,6 @@
 {
   const mockRandom = (...nums) => {
-    nums = nums.map(num => (num - 1) / 10);
+    nums = nums.map((num) => (num - 1) / 10);
     const theRealRandom = Math.random;
     let i = 0;
     function fake() {
@@ -13,15 +13,15 @@
     spyOn(Math, "random").and.callFake(fake);
   };
 
-  describe("randomDamage", function() {
-    it("should return a number between 1 and 10", function() {
+  describe("randomDamage", function () {
+    it("should return a number between 1 and 10", function () {
       let num = randomDamage();
       expect(typeof num).toBe("number");
       expect(num >= 1 && num <= 10).toBeTruthy();
       expect(num).toBe(Math.floor(num));
     });
 
-    it("should always return a number between 1 and 10, including sometimes 1 and sometimes 10", function() {
+    it("should always return a number between 1 and 10, including sometimes 1 and sometimes 10", function () {
       const nums = [];
       for (let i = 0; i < 2000; i++) {
         let num = randomDamage();
@@ -44,11 +44,11 @@
         true,
         true,
         true,
-        true
+        true,
       ]);
     });
 
-    it("should (for testing purposes) return specific numbers based on Math.random", function() {
+    it("should (for testing purposes) return specific numbers based on Math.random", function () {
       mockRandom(3, 1, 10);
       expect(randomDamage()).toBe(3);
       expect(randomDamage()).toBe(1);
@@ -56,8 +56,8 @@
     });
   });
 
-  describe("chooseOption", function() {
-    it("should return one of the two parameters", function() {
+  describe("chooseOption", function () {
+    it("should return one of the two parameters", function () {
       let result = chooseOption("cat", "dog");
       if (result !== "cat") {
         expect(result).toEqual("dog");
@@ -66,7 +66,7 @@
       }
     });
 
-    it("should randomly pick one of the two parameters", function() {
+    it("should randomly pick one of the two parameters", function () {
       const results = {};
       for (let i = 0; i < 2000; i++) {
         let result = chooseOption("cat", "dog");
@@ -76,7 +76,7 @@
       expect(results).toEqual({ cat: true, dog: true });
     });
 
-    it("should (for testing purposes) the first option for random < .5", function() {
+    it("should (for testing purposes) the first option for random < .5", function () {
       mockRandom(1, 2, 3, 4);
       expect(chooseOption("cat", "dog")).toBe("cat");
       expect(chooseOption("dog", "cat")).toBe("dog");
@@ -84,7 +84,7 @@
       expect(chooseOption("dog", "cat")).toBe("dog");
     });
 
-    it("should (for testing purposes) the second option for random > .5", function() {
+    it("should (for testing purposes) the second option for random > .5", function () {
       mockRandom(7, 8, 9, 10);
       expect(chooseOption("cat", "dog")).toBe("dog");
       expect(chooseOption("dog", "cat")).toBe("cat");
@@ -93,21 +93,21 @@
     });
   });
 
-  describe("attackPlayer", function() {
-    it("should return number minus randomDamage, 3", function() {
+  describe("attackPlayer", function () {
+    it("should return number minus randomDamage, 3", function () {
       mockRandom(3);
       let result = attackPlayer(7);
       expect(result).toBe(4);
     });
 
-    it("should return number minus randomDamage, 5", function() {
+    it("should return number minus randomDamage, 5", function () {
       mockRandom(5);
       let result = attackPlayer(7);
       expect(result).toBe(2);
     });
   });
 
-  describe("logging functions", function() {
+  describe("logging functions", function () {
     it("logDeath logs appropriate message to the console", () => {
       spyOn(console, "log");
       logDeath("Tarzan", "Clayton");
@@ -121,7 +121,7 @@
     });
   });
 
-  describe("isDead", function() {
+  describe("isDead", function () {
     it("returns false for positive number 20", () => {
       expect(isDead(20)).toBe(false);
     });
@@ -139,7 +139,7 @@
     });
   });
 
-  describe("fight", function() {
+  describe("fight", function () {
     const PLAYER1 = 2,
       PLAYER2 = 9;
 
